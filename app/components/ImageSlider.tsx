@@ -1,7 +1,12 @@
 "use client";
 import React, { useState, useEffect } from "react";
+type Sliderr = {
+  map(arg0: (s: string, i: number) => React.JSX.Element): React.ReactNode;
+  length: number;
+  // imageUrl: string;
+};
 
-export default function ImageSlider({ slides }: any) {
+export default function ImageSlider({ slides }: { slides: Sliderr }  ) {
   const [current, setCurrent] = useState(0);
 
   // Automatically change slides
@@ -18,13 +23,13 @@ export default function ImageSlider({ slides }: any) {
         className="flex transition ease-out duration-1000"
         style={{ transform: `translateX(-${current * 100}%)` }}
       >
-        {slides.map((s: any, i: number) => (
+        {slides.map((s: string, i: number) => (
           <img src={s} key={i} alt={`Slide ${i}`} />
         ))}
       </div>
       {/* Navigation buttons removed */}
       <div className="lines w-full bottom-0 py-3 flex justify-center gap-3">
-        {slides.map((s: any, i: number) => (
+        {slides.map((s: string, i: number) => (
           <div
             onClick={() => setCurrent(i)}
             key={"circle" + i}
